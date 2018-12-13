@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type MenuItem}" x:Key="ContextMenuItem">
+        <Setter Property="MenuItem.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border HorizontalAlignment="Stretch" x:Name="Root" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26"></ColumnDefinition>
+                                <ColumnDefinition Width="130"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                         x:Name="ImageWrapper" 
+                          Background="{StaticResource MenuItemImageColor}" 
+                         Grid.Column="0">
+                            </Border>
+                            <Border Grid.Column="1" x:Name="NameWrapper" 
+                      HorizontalAlignment="Stretch" Padding="1,0,2,0">
+                                <TextBlock Text="{TemplateBinding MenuItem.Header}" 
+                             x:Name="Name" 
+                            Foreground="{StaticResource MenuItemTextColor}" 
+                           VerticalAlignment="Center" 
+                            HorizontalAlignment="Stretch" 
+                           Margin="2,0,0,0" ></TextBlock>
+                            </Border>
+                            <Border x:Name="DisabledOverlay" 
+                      HorizontalAlignment="Stretch" 
+                       VerticalAlignment="Stretch" 
+                     Grid.Column="0" Grid.ColumnSpan="2" 
+                       Background="{StaticResource ContextMenuBorderColor}" 
+                      Opacity="0" >
+                               </Border>
+                           
+                        </Grid>
+                   
+                    </Border>
+               
+                    <ControlTemplate.Triggers>
+                
+                        <Trigger Property="IsMouseOver" Value="true" SourceName="Root">
+                   
+                            <Trigger.Setters>
+                     
+                                <Setter Property="Background" 
+                      TargetName="NameWrapper" 
+                       Value="{StaticResource MenuItemTextColor}" >
+                                    </Setter>
+                           
+                                <Setter Property="Background" 
+                      TargetName="Name" 
+                     Value="{StaticResource MenuItemTextColor}" >
+                                   </Setter>
+                     
+                                <Setter Property="Foreground" 
+                      TargetName="Name" 
+                      Value="{StaticResource MenuItemHoverTextColor}" >
+                                    </Setter>
+                       
+                                <Setter Property="Background" 
+                        TargetName="ImageWrapper" 
+                        Value="{StaticResource MenuItemTextColor}" >
+                                    </Setter>
+                        
+                            </Trigger.Setters>
+                     
+                        </Trigger>
+                
+                        <Trigger Property="IsEnabled" Value="false" SourceName="Root">
+                   
+                            <Trigger.Setters>
+                      
+                                <Setter Property="Opacity" 
+                        TargetName="DisabledOverlay" 
+                       Value="0.7" ></Setter>
+              
+                                <Setter Property="Foreground" 
+                         TargetName="Name" 
+                         Value="{StaticResource ContextMenuBorderColor}" >
+                                    </Setter>
+                     
+                            </Trigger.Setters>
+                  
+                        </Trigger>
+            
+                    </ControlTemplate.Triggers>
+     
+                </ControlTemplate>
+      
+            </Setter.Value>
+   
+        </Setter>
+
+    </Style>
+</ResourceDictionary>

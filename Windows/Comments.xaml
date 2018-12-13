@@ -1,0 +1,58 @@
+﻿<Window x:Class="TM2.Windows.Comments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TM2.Windows"
+        mc:Ignorable="d"
+        Icon="/TM2;component/Images/Logo.ico"
+        Width="500"
+        FontFamily="Calibri"
+        FontSize="14.667"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TM2;component/StyleDictionarys/ScrollViewer.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFDCFBE" Offset="1" />
+                <GradientStop Color="White" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderThickness="1" CornerRadius="50" IsHitTestVisible="False">
+            <ProgressBar Name="PrgSearch" Background="Transparent" BorderBrush="{x:Null}" Margin="0,0,0,-4" Height="8"
+                         IsHitTestVisible="False" IsEnabled="False" IsIndeterminate="True"
+                         VerticalAlignment="Bottom" BorderThickness="1">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFFF946B" Offset="0.246" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+        </Border>
+        <Label Grid.Row="1" Name="CommentsCount" Content="11 Komentāri"/>
+        <ScrollViewer Grid.Row="2">
+            <StackPanel Name="Container"/>
+        </ScrollViewer>
+    </Grid>
+
+</Window>

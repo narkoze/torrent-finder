@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <Options>
+    <autologin>True</autologin>
+    <autohide>False</autohide>
+    <downloadspath></downloadspath>
+  </Options>
+  <Accounts>
+    <fanologin>piemeram</fanologin>
+    <fanopassword>z3QmltDl6eYix0H9spRBz2zJiFEw+xR1p6wZySDgoJfhRl6KAlAvpmOO9+pQvbs6oLyVjsOZb31dJrbFG6uYYGYtbPu941tREu+9VUE5N83gQI4LG3o7LazePbkJcT2G</fanopassword>
+    <kinozallogin>piemeram</kinozallogin>
+    <kinozalpassword>LMZZZGvhkkKax/ehRkIUiC0LwsVindSVSkiRpephQnPjxg/wycTQ/CHUVigMDUaMkSdlI494cpXRGvfFFmRtP7wEr1Zm8XhiXLq3VIyO78rVOoQYhpaAVUcBReUYMPQg</kinozalpassword>
+    <filebaselogin>piemeram.lv</filebaselogin>
+    <filebasepassword>Qg5TeYIJPvQwGhoOpDKhbNyrX5ju/9gSIZvm+VXMEJk39B1jsLoJUAJFboGhdRbkytl1/CNpGRMXkKFC16PccIPI3wYERhjie3h7/mnb5zP7h3i+JxL5jsWO8sUsi1UO</filebasepassword>
+  </Accounts>
+</Config>

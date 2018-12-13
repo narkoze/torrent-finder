@@ -1,0 +1,774 @@
+﻿<Window x:Class="TM2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tab="clr-namespace:TM2"
+        mc:Ignorable="d"
+        Title="Mans meklētājs"
+        FontFamily="Calibri"
+        Icon="Images/Logo.ico"
+        WindowState="Maximized"
+        FontSize="14.667"
+        Width="1200"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StyleDictionarys/GroupBox.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/ContextMenu.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/ProgressBar.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/TabControl.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/Button.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/TextBox.xaml"/>
+                <ResourceDictionary Source="StyleDictionarys/ComboBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <tab:TabControlEx x:Name="tabControl">
+        <TabItem Style="{StaticResource Main}">
+            <TabItem.Header>
+                <Image Source="Images/TabControl/home.png"
+                       Width="20" OpacityMask="#FF333333"/>
+            </TabItem.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        BorderThickness="0,0,0,2"
+                        BorderBrush="#FFFF946B">
+                    <DockPanel Name="navigationPanel"
+                                Grid.Row="0"
+                                Grid.Column="0" Background="White">
+                        <GroupBox Name="MainMenu"
+                                  Style="{StaticResource Navigation}"
+                                  Height="116">
+                            <Grid Margin="4,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="14"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0"
+                                            Orientation="Horizontal">
+                                    <Button Name="btnBack"
+                                            Click="btnBack_Click"
+                                            Style="{StaticResource Red}"
+                                            Visibility="Collapsed">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                                                   Width="64"
+                                                   Source="/TM2;component/Images/Navigation/back.png"/>
+                                            <StackPanel Grid.Row="1"
+                                                        Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                                <TextBlock Text="Atpakaļ"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Button>
+                                    <Border Name="borderBack"
+                                            Visibility="Collapsed"
+                                            BorderThickness="1"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            Margin="4,12"
+                                            Width="1">
+                                        <Border.BorderBrush>
+                                            <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                                <DrawingBrush.Drawing>
+                                                    <DrawingGroup>
+                                                        <GeometryDrawing Brush="Gray">
+                                                            <GeometryDrawing.Geometry>
+                                                                <GeometryGroup>
+                                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                                </GeometryGroup>
+                                                            </GeometryDrawing.Geometry>
+                                                        </GeometryDrawing>
+                                                    </DrawingGroup>
+                                                </DrawingBrush.Drawing>
+                                            </DrawingBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                    <Button Name="btnToday"
+                                            Click="btnToday_Click"
+                                            PreviewMouseRightButtonUp="btnToday_PreviewMouseRightButtonUp"
+                                            Cursor="Help"
+                                            IsEnabled="False">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="24"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                                                   Width="64"
+                                                   Source="/TM2;component/Images/Navigation/calendar.png"/>
+                                            <StackPanel Grid.Row="1"
+                                                        Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                                <TextBlock Name="txtToday"
+                                                           Text="Šodienas"
+                                                           Tag=""
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Button>
+                                    <Button Name="btnMovies"
+                                            Click="btnMovies_Click">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                               Width="64"
+                               Source="/TM2;component/Images/Navigation/movies.png"/>
+                                            <TextBlock Grid.Row="1" 
+                                   Text="Filmas"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Button>
+                                    <Button Name="btnTV"
+                                            Click="btnTV_Click">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                               Width="64"
+                               Source="/TM2;component/Images/Navigation/tv.png"/>
+                                            <TextBlock Grid.Row="1" 
+                                   Text="TV"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Button>
+                                    <Button Name="btnGames"
+                                            Click="btnGames_Click">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                                                   Width="64"
+                                                   Source="/TM2;component/Images/Navigation/games.png"/>
+                                            <TextBlock Grid.Row="1" 
+                                                       Text="Spēles" 
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Button>
+                                    <Button Name="btn4k">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                                                   Width="64"
+                                                   Source="/TM2;component/Images/Navigation/4k.png"/>
+                                            <TextBlock Grid.Row="1" 
+                                                       Text="Ultra HD" 
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Button>
+                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="Galvenā izvēlne"
+                                           HorizontalAlignment="Center"
+                                           Foreground="#FFFF946B"
+                                           FontWeight="Bold"
+                                           FontSize="12"/>
+                                <Popup Name="datePicker"
+                                       Placement="Relative"
+                                       IsOpen="False"
+                                       StaysOpen="False">
+                                    <Grid Margin="0,-3">
+                                        <Calendar Name="calendar"
+                                                  SelectedDatesChanged="calendar_SelectedDatesChanged"
+                                                  Background="White" 
+                                                  BorderBrush="#FFFF946B" 
+                                                  FirstDayOfWeek="Monday"/>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Name="TorrentSearch"
+                                  Style="{StaticResource Navigation}"
+                                  Height="116">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="14"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="0">
+                                    <Grid Margin="4,4,4,0"
+                                          VerticalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="Kategorija: "
+                                               Grid.Row="0"
+                                               Grid.Column="0"                        
+                                               FontSize="12"
+                                               VerticalContentAlignment="Center"
+                                               Padding="0"
+                                               HorizontalContentAlignment="Right"
+                                               FontWeight="Bold"/>
+                                        <ComboBox Name="cmbCategory"
+                                                  Grid.Row="0"
+                                                  Grid.Column="1"
+                                                  SelectedIndex="0">
+                                        </ComboBox>
+                                        <Label Content="Filmu žanrs: "
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               FontSize="12"
+                                               VerticalContentAlignment="Center"
+                                               Padding="0"
+                                               HorizontalContentAlignment="Right"
+                                               FontWeight="Bold"/>
+                                        <ComboBox Name="cmbGenre"
+                                                 Grid.Row="1"
+                                                 Grid.Column="1"
+                                                 SelectedIndex="0"
+                                                 Margin="0,7"
+                                                 IsEnabled="False">
+                                        </ComboBox>
+                                        <Label Content="Gads: "
+                                               Grid.Row="2"
+                                               Grid.Column="0"
+                                               FontSize="12"
+                                               VerticalContentAlignment="Center"
+                                               Padding="0"
+                                               HorizontalContentAlignment="Right"
+                                               FontWeight="Bold"/>
+                                        <ComboBox Name="cmbYear"
+                                                  Grid.Row="2"
+                                                  Grid.Column="1"
+                                                  SelectedIndex="0"
+                                                  IsEnabled="False">
+                                        </ComboBox>
+                                    </Grid>
+                                    <Border BorderThickness="1"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            Margin="0,14"
+                                            Width="1">
+                                        <Border.BorderBrush>
+                                            <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                                <DrawingBrush.Drawing>
+                                                    <DrawingGroup>
+                                                        <GeometryDrawing Brush="Gray">
+                                                            <GeometryDrawing.Geometry>
+                                                                <GeometryGroup>
+                                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                                </GeometryGroup>
+                                                            </GeometryDrawing.Geometry>
+                                                        </GeometryDrawing>
+                                                    </DrawingGroup>
+                                                </DrawingBrush.Drawing>
+                                            </DrawingBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                    <StackPanel VerticalAlignment="Center"
+                                                Margin="4,0">
+                                        <ComboBox Name="CmbMeklet"
+                                                  KeyUp="CmbMeklet_KeyUp"
+                                                  MouseRightButtonUp="CmbMeklet_MouseRightButtonUp"
+                                                  Style="{StaticResource ComboBoxMeklet}"
+                                                  Height="36" 
+                                                  Padding="2,1,1,1" 
+                                                  Width="250" 
+                                                  IsEditable="True"
+                                                  IsTextSearchEnabled="False"
+                                                  IsEnabled="False"/>
+                                        <Button Name="BtnMeklet"
+                                                Click="BtnMeklet_Click"
+                                                Width="248" 
+                                                Height="36" 
+                                                Padding="1"
+                                                IsEnabled="False">
+                                            <Grid HorizontalAlignment="Center" 
+                                                  Margin="0,0,10,0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="24" />
+                                                    <ColumnDefinition Width="40" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image 
+                                Grid.Column="0" 
+                                Source="/TM2;component/Images/Navigation/search.png" 
+                                Width="24" 
+                                Height="24" />
+                                                <TextBlock 
+                                Grid.Column="1" 
+                                Text="Meklēt" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,0,0,5" />
+                                            </Grid>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                                <TextBlock Text="Torrentu meklēšana"
+                                           Grid.Row="1"
+                                           HorizontalAlignment="Center"
+                                           Foreground="#FFFF946B"
+                                           FontWeight="Bold"
+                                           FontSize="12"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Name="Trackers"
+                                  Style="{StaticResource Navigation}"
+                                  Height="116">
+                            <Grid Margin="4,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="14"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel SizeChanged="SplitterCheck"
+                                            Orientation="Horizontal">
+                                    <Button Name="btnKonti"
+                                            Click="btnKonti_Click">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image 
+                            Grid.Row="0" 
+                            Width="64"
+                            Source="/TM2;component/Images/Navigation/user.png"
+                        />
+                                            <TextBlock 
+                            Grid.Row="1" 
+                            Text="Konti"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" 
+                        />
+                                        </Grid>
+                                    </Button>
+                                    <Border Name="spliter"
+                                            Visibility="Collapsed"
+                                            BorderThickness="1"
+                                            Padding="0"
+                                            HorizontalAlignment="Center"
+                                            Margin="4,12"
+                                            Width="1">
+                                        <Border.BorderBrush>
+                                            <DrawingBrush Viewport="0,0,8,8" ViewportUnits="Absolute" TileMode="Tile">
+                                                <DrawingBrush.Drawing>
+                                                    <DrawingGroup>
+                                                        <GeometryDrawing Brush="Gray">
+                                                            <GeometryDrawing.Geometry>
+                                                                <GeometryGroup>
+                                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                                    <RectangleGeometry Rect="50,50,50,50" />
+                                                                </GeometryGroup>
+                                                            </GeometryDrawing.Geometry>
+                                                        </GeometryDrawing>
+                                                    </DrawingGroup>
+                                                </DrawingBrush.Drawing>
+                                            </DrawingBrush>
+                                        </Border.BorderBrush>
+                                    </Border>
+                                    <GroupBox Name="groupBoxFano"
+                                              MouseEnter="groupBoxFano_MouseEnter"
+                                              MouseLeave="groupBoxFano_MouseLeave"
+                                              PreviewMouseLeftButtonUp="groupBoxFano_PreviewMouseLeftButtonUp"
+                                              Visibility="Collapsed"
+                                              Style="{StaticResource Tracker}"
+                                              VerticalAlignment="Bottom"
+                                              HorizontalAlignment="Center"
+                                              Height="95">
+                                        <Grid>
+                                            <ProgressBar Name="progressBarFano"
+                                                         Visibility="Hidden"
+                                                         IsIndeterminate="True"
+                                                         Height="74"
+                                                         Width="74"
+                                                         RenderTransformOrigin="0.5,0.5"
+                                                         Margin="0"
+                                                         Padding="0"
+                                                         Background="{x:Null}"
+                                                         BorderBrush="{x:Null}">
+                                                <ProgressBar.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ProgressBar.RenderTransform>
+                                                <ProgressBar.Foreground>
+                                                    <LinearGradientBrush EndPoint="0,0" MappingMode="RelativeToBoundingBox" StartPoint="1,0">
+                                                        <GradientStop Color="#FFFBB296" Offset="0"/>
+                                                        <GradientStop Color="Transparent" Offset="0.235"/>
+                                                    </LinearGradientBrush>
+                                                </ProgressBar.Foreground>
+                                            </ProgressBar>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="37"/>
+                                                    <ColumnDefinition Width="37"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Name="btnFanoClose"
+                                                        Style="{StaticResource btnTab}"
+                                                        PreviewMouseLeftButtonUp="btnFanoClose_PreviewMouseLeftButtonUp"
+                                                        Visibility="Hidden"
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Right"
+                                                        Cursor="Hand"
+                                                        ToolTip="Atvienot"/>
+                                                <Image Grid.Row="1"
+                                                       Grid.ColumnSpan="2"
+                                                       Width="16"
+                                                       Source="/TM2;component/Images/Trackers/fano.in.png"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0"/>
+                                                <TextBlock Text="Fano.in"
+                                                           Grid.Row="2"
+                                                           Grid.ColumnSpan="2"
+                                                           Margin="4,0,0,0"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtFanoUser"
+                                                           Grid.Row="3"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Center"
+                                                           FontWeight="Bold"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtFanoRatio"
+                                                           Grid.Row="4"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="12"/>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox Name="groupBoxKinozal"
+                                              MouseEnter="groupBoxKinozal_MouseEnter"
+                                              MouseLeave="groupBoxKinozal_MouseLeave"
+                                              PreviewMouseLeftButtonUp="groupBoxKinozal_PreviewMouseLeftButtonUp"
+                                              Visibility="Collapsed"
+                                              Style="{StaticResource Tracker}"
+                                              VerticalAlignment="Bottom"
+                                              HorizontalAlignment="Center"
+                                              Height="95">
+                                        <Grid>
+                                            <ProgressBar Name="progressBarKinozal"
+                                                         Visibility="Hidden"
+                                                         IsIndeterminate="True"
+                                                         Height="74"
+                                                         Width="74"
+                                                         RenderTransformOrigin="0.5,0.5"
+                                                         Margin="0"
+                                                         Padding="0"
+                                                         Background="{x:Null}"
+                                                         BorderBrush="{x:Null}">
+                                                <ProgressBar.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ProgressBar.RenderTransform>
+                                                <ProgressBar.Foreground>
+                                                    <LinearGradientBrush EndPoint="0,0" MappingMode="RelativeToBoundingBox" StartPoint="1,0">
+                                                        <GradientStop Color="#FFFBB296" Offset="0"/>
+                                                        <GradientStop Color="Transparent" Offset="0.235"/>
+                                                    </LinearGradientBrush>
+                                                </ProgressBar.Foreground>
+                                            </ProgressBar>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="36"/>
+                                                    <ColumnDefinition Width="2"/>
+                                                    <ColumnDefinition Width="36"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Name="btnKinozalClose"
+                                                        Style="{StaticResource btnTab}"
+                                                        PreviewMouseLeftButtonUp="btnKinozalClose_PreviewMouseLeftButtonUp"
+                                                        Visibility="Hidden"
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        Grid.ColumnSpan="2"
+                                                        HorizontalAlignment="Right"
+                                                        Cursor="Hand"
+                                                        ToolTip="Atvienot"/>
+                                                <Image Grid.Row="1"
+                                                       Grid.ColumnSpan="3"
+                                                       Width="16"
+                                                       Source="/TM2;component/Images/Trackers/kinozal.tv.png"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0"/>
+                                                <TextBlock Grid.Row="2"
+                                                           Grid.ColumnSpan="3"
+                                                           Text="Kinozal.tv"
+                                                           Margin="4,0,0,0"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtKinozalUser"
+                                                           Grid.Row="3"
+                                                           Grid.ColumnSpan="3"
+                                                           HorizontalAlignment="Center"
+                                                           FontWeight="Bold"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtKinozalRatio"
+                                                           Grid.Row="4"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Right"
+                                                           Margin="0,0,4,0"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="sp"
+                                                           Visibility="Hidden"
+                                                           Grid.Row="4"
+                                                           Grid.Column="1"
+                                                           Text="|"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="9.333"
+                                                           Margin="0,1,0,0"
+                                                           Foreground="Black"/>
+                                                <TextBlock Name="txtAvailable"
+                                                           Grid.Row="4"
+                                                           Grid.Column="2"
+                                                           HorizontalAlignment="Left"
+                                                           Margin="4,0,0,0"
+                                                           FontSize="12"/>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                    <GroupBox Name="groupBoxFilebase"
+                                              MouseEnter="groupBoxFilebase_MouseEnter"
+                                              MouseLeave="groupBoxFilebase_MouseLeave"
+                                              PreviewMouseLeftButtonUp="groupBoxFilebase_PreviewMouseLeftButtonUp"
+                                              Visibility="Collapsed"
+                                              Style="{StaticResource Tracker}"
+                                              VerticalAlignment="Bottom"
+                                              HorizontalAlignment="Center"
+                                              Height="95">
+                                        <Grid>
+                                            <ProgressBar Name="progressBarFilebase"
+                                                         Visibility="Hidden"
+                                                         IsIndeterminate="True"
+                                                         Height="74"
+                                                         Width="74"
+                                                         RenderTransformOrigin="0.5,0.5"
+                                                         Margin="0"
+                                                         Padding="0"
+                                                         Background="{x:Null}"
+                                                         BorderBrush="{x:Null}">
+                                                <ProgressBar.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ProgressBar.RenderTransform>
+                                                <ProgressBar.Foreground>
+                                                    <LinearGradientBrush EndPoint="0,0" MappingMode="RelativeToBoundingBox" StartPoint="1,0">
+                                                        <GradientStop Color="#FFFBB296" Offset="0"/>
+                                                        <GradientStop Color="Transparent" Offset="0.235"/>
+                                                    </LinearGradientBrush>
+                                                </ProgressBar.Foreground>
+                                            </ProgressBar>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="37"/>
+                                                    <ColumnDefinition Width="37"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Button Name="btnFilebaseClose"
+                                                        Style="{StaticResource btnTab}"
+                                                        PreviewMouseLeftButtonUp="btnFilebaseClose_PreviewMouseLeftButtonUp"
+                                                        Visibility="Hidden"
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Right"
+                                                        Cursor="Hand"
+                                                        ToolTip="Atvienot"/>
+                                                <Image Grid.Row="1"
+                                                       Grid.ColumnSpan="2"
+                                                       Width="16"
+                                                       Source="/TM2;component/Images/Trackers/filebase.ws.png"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="0"/>
+                                                <TextBlock Grid.Row="2"
+                                                           Grid.ColumnSpan="2"
+                                                           Text="Filebase.ws"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtFilebaseUser"
+                                                           Grid.Row="3"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Center"
+                                                           FontWeight="Bold"
+                                                           FontSize="12"/>
+                                                <TextBlock Name="txtFilebaseRatio"
+                                                           Grid.Row="4"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Center"
+                                                           FontSize="12"/>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                </StackPanel>
+                                <TextBlock Text="Trakeri"
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Center"
+                                            Foreground="#FFFF946B"
+                                            FontWeight="Bold"
+                                            FontSize="12"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Name="Other"
+                                  Style="{StaticResource Navigation}"
+                                  Height="116">
+                            <Grid Margin="4,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="14"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="0" HorizontalAlignment="Right">
+                                    <Button Name="btnIespejas"
+                                            Click="btnIespejas_Click">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="24" />
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" 
+                                                   Width="64"
+                                                   Source="/TM2;component/Images/Navigation/options.png"/>
+                                            <TextBlock Text="Iespējas"
+                                                       Grid.Row="1" 
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Button>
+                                </StackPanel>
+                                <TextBlock Text="Cits"
+                                           Grid.Row="1"
+                                           HorizontalAlignment="Center"
+                                           Foreground="#FFFF946B"
+                                           FontWeight="Bold"
+                                           FontSize="12"/>
+                            </Grid>
+                        </GroupBox>
+
+                    </DockPanel>
+                </Border>
+                <ProgressBar Name="progressBar"
+                             Grid.Row="1" 
+                             Visibility="Collapsed"
+                             Height="8"
+                             IsHitTestVisible="False"
+                             IsIndeterminate="True"
+                             Background="Transparent"
+                             BorderBrush="{x:Null}">
+                    <ProgressBar.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                    <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                    <RotateTransform Angle="90" CenterY="0.5" CenterX="0.5" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFFF946B" Offset="0.246" />
+                            <GradientStop Color="Transparent" Offset="1" />
+                        </LinearGradientBrush>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+                <GroupBox Name="filterPanel"
+                          Visibility="Collapsed"
+                          Grid.Row="2"
+                          Style="{StaticResource Filter}"
+                          HorizontalAlignment="Left">
+                </GroupBox>
+                <GroupBox Name="filterPanelCategorys"
+                          Visibility="Collapsed"
+                          Grid.Row="2"
+                          Style="{StaticResource Filter}"
+                          HorizontalAlignment="Left">
+                </GroupBox>
+                <Grid Name="containerList"
+                      Grid.Row="3">
+                </Grid>
+                <Grid Name="containerCovers"
+                      Grid.Row="3">
+                </Grid>
+                <GroupBox Style="{StaticResource Navigation}"
+                          Grid.Row="5">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Name="publishVersion"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Left"
+                                   FontSize="12"/>
+                        <Image Name="imgWorld"
+                               Grid.Column="1"
+                               ToolTip="www"
+                               Width="16"
+                               Source="Images/Other/world.png"
+                               HorizontalAlignment="Right"
+                               Cursor="Hand"
+                               PreviewMouseLeftButtonUp="imgWorld_PreviewMouseLeftButtonUp"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </TabItem>
+    </tab:TabControlEx>
+</Window>
